@@ -351,8 +351,10 @@ awful.rules.rules = {
     { rule = { class = "Empathy" }, properties = { tag = tags[1][7] } },
     { rule = { class = "Pidgin" }, properties = { tag = tags[1][7] } },
     { rule = { class = "Xchat" }, properties = { tag = tags[1][8] } },
-    { rule = { title = "Mutt" }, properties = { tag = tags[2][9] } },
+    { rule = { name = "Mutt-win" }, properties = { tag = tags[2][9] } },
+    { rule = { name = "Home-win" }, properties = { tag = tags[1][9] } },
     { rule = { class = "Firefox" }, properties = { tag = tags[2][8] } },
+    { rule = { class = "nuvolaplayer" }, properties = { tag = tags[2][8] } },
     { rule = { class = "Skype" }, properties = { tag = tags[1][8] } },
     { rule = { class = "Vmware" }, properties = { tag = tags[1][6] } },
     -- Set Firefox to always map on tags number 2 of screen 1.
@@ -433,10 +435,12 @@ run_once('dropbox','start',1)
 run_once('synergys',nil,1)
 
 -- Interactive apps
-run_once('gnome-terminal','--disable-factory --title=Mutt -x mutt',2)
+run_once('gnome-terminal','--disable-factory --title=Mutt-win -x mutt',2)
+run_once('gnome-terminal','--disable-factory --title=Home-win -x i',1)
 run_once('google-chrome',nil,1)
 run_once('pidgin',nil,1)
-run_once('firefox',nil,2)
+-- run_once('firefox',nil,2)
+run_once('nuvolaplayer',nil,2)
 
 -- background image
 awful.util.spawn_with_shell('eval `cat ~/.fehbg `')
