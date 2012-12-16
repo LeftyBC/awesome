@@ -321,7 +321,7 @@ function load(self, config)
 	end
 
 	local bg_color        = delightful_utils.find_theme_color({ 'bg_widget', 'bg_normal'                     })
-	local fg_color        = delightful_utils.find_theme_color({ 'fg_widget', 'fg_normal'                     })
+	local fg_color        = "#ff4422" -- = delightful_utils.find_theme_color({ 'fg_widget', 'fg_normal'                     })
 	local fg_center_color = delightful_utils.find_theme_color({ 'fg_center_widget', 'fg_widget', 'fg_normal' })
 	local fg_end_color    = delightful_utils.find_theme_color({ 'fg_end_widget', 'fg_widget', 'fg_normal'    })
 

@@ -100,11 +100,11 @@ require('delightful.widgets.pulseaudio')
 -- This is the order the widgets appear in the wibox.
 install_delightful = {
     delightful.widgets.network,
+    delightful.widgets.pulseaudio,
     delightful.widgets.cpu,
     delightful.widgets.memory,
-    -- delightful.widgets.imap,
     delightful.widgets.battery,
-    delightful.widgets.pulseaudio,
+    -- delightful.widgets.imap,
     delightful.widgets.datetime
 }
 
@@ -131,6 +131,9 @@ delightful_config = {
     },
     [delightful.widgets.pulseaudio] = {
         mixer_command = 'gnome-volume-control',
+    },
+    [delightful.widgets.battery] = {
+        battery = 'BAT0',
     },
 }
 
