@@ -19,7 +19,6 @@ require("debian.menu")
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
---beautiful.init("/home/ad/colinm/.config/awesome/themes/bamboo/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -55,7 +54,7 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {}
 tags[1] = {
-        names = { "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9" },
+        names = { "t1", "t2", "t3", "t4", "t5", "virt", "comms", "skype", "home" },
         layout = { layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[10], layouts[10] }
 }
 
@@ -85,83 +84,15 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
 
-
--- Delightful widgets
-require('delightful.widgets.battery')
-require('delightful.widgets.cpu')
-require('delightful.widgets.datetime')
--- require('delightful.widgets.imap')
-require('delightful.widgets.memory')
-require('delightful.widgets.network')
-require('delightful.widgets.pulseaudio')
--- require('delightful.widgets.weather')
-
--- Which widgets to install?
--- This is the order the widgets appear in the wibox.
-install_delightful = {
-    delightful.widgets.network,
-    delightful.widgets.pulseaudio,
-    delightful.widgets.cpu,
-    delightful.widgets.memory,
-    delightful.widgets.battery,
-    -- delightful.widgets.imap,
-    delightful.widgets.datetime
-}
-
--- Widget configuration
-delightful_config = {
-    [delightful.widgets.cpu] = {
-        command = 'gnome-system-monitor',
-    },
-    [delightful.widgets.network] = {
-	excluded_devices = { '^virbr%d+$', '^vmnet%d+$' },
-    },
---     [delightful.widgets.imap] = {
---         {
---             user      = 'myuser',
---             password  = 'mypassword',
---             host      = 'mail.example.com',
---             ssl       = true,
---             mailboxes = { 'INBOX', 'awesome' },
---             command   = 'evolution -c mail',
---         },
---     },
-    [delightful.widgets.memory] = {
-        command = 'gnome-system-monitor',
-    },
-    [delightful.widgets.pulseaudio] = {
-        mixer_command = 'gnome-volume-control',
-    },
-    [delightful.widgets.battery] = {
-        battery = 'BAT0',
-    },
-}
-
--- Prepare the container that is used when constructing the wibox
-local delightful_container = { widgets = {}, icons = {} }
-if install_delightful then
-    for _, widget in pairs(awful.util.table.reverse(install_delightful)) do
-        local config = delightful_config and delightful_config[widget]
-        local widgets, icons = widget:load(config)
-        if widgets then
-            if not icons then
-                icons = {}
-            end
-            table.insert(delightful_container.widgets, awful.util.table.reverse(widgets))
-            table.insert(delightful_container.icons,   awful.util.table.reverse(icons))
-        end
-    end
-end
-
 -- {{{ Wibox
 -- Create a textclock widget
 --  Network usage widget
  -- Initialize widget
- -- netwidget = widget({ type = "textbox" })
+ netwidget = widget({ type = "textbox" })
  -- Register widget
- -- vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393">${eth0 down_kb}</span> <span color="#7F9F7F">${eth0 up_kb}</span>', 3)
+ vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393">${eth0 down_kb}</span> <span color="#7F9F7F">${eth0 up_kb}</span>', 3)
 
--- mytextclock = awful.widget.textclock({ align = "right" })
+mytextclock = awful.widget.textclock({ align = "right" })
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
@@ -226,50 +157,22 @@ for s = 1, screen.count() do
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
---     mywibox[s].widgets = {
---         {
---             mylauncher,
---             mytaglist[s],
---             mypromptbox[s],
---             layout = awful.widget.layout.horizontal.leftright
---         },
---         mylayoutbox[s],
---         mytextclock,
---         s == 1 and mysystray or nil,
---         -- s == 2 and netwidget or nil,
---         mytasklist[s],
---         layout = awful.widget.layout.horizontal.rightleft
---     }
-
-
-	local widgets_front = {
-	    {
-		mylauncher,
-		mytaglist[s],
-		mypromptbox[s],
-		layout = awful.widget.layout.horizontal.leftright
-	    },
-	    mylayoutbox[s],
-	}
-	local widgets_middle = {}
-	for delightful_container_index, delightful_container_data in pairs(delightful_container.widgets) do
-	    for widget_index, widget_data in pairs(delightful_container_data) do
-		table.insert(widgets_middle, widget_data)
-		if delightful_container.icons[delightful_container_index] and delightful_container.icons[delightful_container_index][widget_index] then
-		    table.insert(widgets_middle, delightful_container.icons[delightful_container_index][widget_index])
-		end
-	    end
-	end
-	local widgets_end = {
-	    s == 1 and mysystray or nil,
-	    mytextclock,
-	    mytasklist[s],
-	    layout = awful.widget.layout.horizontal.rightleft
-	}
-	mywibox[s].widgets = awful.util.table.join(widgets_front, widgets_middle, widgets_end)
+    mywibox[s].widgets = {
+        {
+            mylauncher,
+            mytaglist[s],
+            mypromptbox[s],
+            layout = awful.widget.layout.horizontal.leftright
+        },
+        mylayoutbox[s],
+        mytextclock,
+        s == 1 and mysystray or nil,
+        s == 2 and netwidget or nil,
+        mytasklist[s],
+        layout = awful.widget.layout.horizontal.rightleft
+    }
 end
 -- }}}
-
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
@@ -511,7 +414,7 @@ run_once('gnome-power-manager',nil,1)
 run_once('gnome-sound-applet',nil,1)
 run_once('gnome-volume-control-applet',nil,1)
 run_once('gnome-keyring-daemon','--start --components=ssh,keyring,pkcs11',1)
-run_once('ssh-add','~/.ssh/id_rsa-AIRG',1)
+--run_once('ssh-add','~/.ssh/id_rsa ~/.ssh/id_rsa-AIRG',1)
 run_once('indicator-cpufreq',nil,1)
 run_once('nm-applet',nil,1)
 run_once('indicator-session-service',nil,1)
@@ -524,8 +427,7 @@ run_once('synergys',nil,1)
 
 -- Interactive apps
 run_once('google-chrome',nil,1)
--- run_once('pidgin',nil,1)
-run_once('quicksynergy',nil,1)
+run_once('pidgin',nil,1)
 
 -- background image
 awful.util.spawn_with_shell('eval `cat ~/.fehbg `')

@@ -19,7 +19,7 @@ require("debian.menu")
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
---beautiful.init("/home/ad/colinm/.config/awesome/themes/bamboo/theme.lua")
+-- beautiful.init("/home/ad/colinm/.config/awesome/themes/bamboo/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -526,6 +526,8 @@ run_once('synergys',nil,1)
 run_once('google-chrome',nil,1)
 -- run_once('pidgin',nil,1)
 run_once('quicksynergy',nil,1)
+
+run_once('xfce4-power-manager',nil,1)
 
 -- background image
 awful.util.spawn_with_shell('eval `cat ~/.fehbg `')
