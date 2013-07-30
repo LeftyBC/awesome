@@ -59,15 +59,16 @@ tags[1] = {
 }
 tags[2] = {
         names = { "web", "t2", "t3", "t4", "t5", "t6", "t7", "music", "mail" },
-        layout = { layouts[10], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[10], layouts[10] }
+       layout = { layouts[10], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[10], layouts[10] }
 }
 
 for s = 1 , screen.count() do
-    -- Each screen has its own tag table.
-    -- tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-    tags[s] = awful.tag(tags[s].names, s, tags[s].layout)
+  -- Each screen has its own tag table.
+  -- tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+ tags[s] = awful.tag(tags[s].names, s, tags[s].layout)
 end
 -- }}}
+
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -346,13 +347,13 @@ awful.rules.rules = {
     { rule = { class = "MPlayer" }, properties = { floating = true } },
     { rule = { class = "pinentry" }, properties = { floating = true } },
     { rule = { class = "gimp" }, properties = { floating = true } },
-    { rule = { class = "Google-chrome" }, properties = { tag = tags[2][1] } },
-    { rule = { class = "banshee" }, properties = { tag = tags[2][8] } },
+    { rule = { class = "Google-chrome" }, properties = { tag = tags[1][1] } },
+    { rule = { class = "banshee" }, properties = { tag = tags[1][8] } },
     { rule = { class = "Empathy" }, properties = { tag = tags[1][7] } },
     { rule = { class = "Pidgin" }, properties = { tag = tags[1][7] } },
     { rule = { class = "Xchat" }, properties = { tag = tags[1][8] } },
-    { rule = { class = "Hipchat" }, properties = { tag = tags[1][7] } },
-    { rule = { name = "Mutt-win" }, properties = { tag = tags[2][9] } },
+    { rule = { class = "Hipchat" }, properties = { tag = tags[2][7] } },
+    { rule = { name = "Mutt-win" }, properties = { tag = tags[1][9] } },
     { rule = { name = "Home-win" }, properties = { tag = tags[1][9] } },
     -- { rule = { class = "Firefox" }, properties = { tag = tags[2][8] } },
     { rule = { class = "nuvolaplayer" }, properties = { tag = tags[2][8] } },
@@ -412,34 +413,34 @@ end
 
 
 
-run_once('dbus-launch',nil,1)
-run_once('gnome-settings-daemon',nil,1)
-run_once('systemd',nil,1)
-run_once('gnome-power-manager',nil,1)
-run_once('gnome-sound-applet',nil,1)
-run_once('gnome-volume-control-applet',nil,1)
-run_once('gnome-keyring-daemon','--start --components=ssh,keyring,pkcs11',1)
+--run_once('dbus-launch',nil,1)
+--run_once('gnome-settings-daemon',nil,1)
+--run_once('systemd',nil,1)
+--run_once('gnome-power-manager',nil,1)
+--run_once('gnome-sound-applet',nil,1)
+--run_once('gnome-volume-control-applet',nil,1)
+--run_once('gnome-keyring-daemon','--start --components=ssh,keyring,pkcs11',1)
 --run_once('skype',nil,2)
 --run_once('empathy',nil,2)
-run_once('ssh-add','~/.ssh/id_rsa ~/.ssh/id_rsa-AIRG',1)
-run_once('indicator-cpufreq',nil,1)
-run_once('nm-applet',nil,1)
-run_once('evolution-alarm-notify',nil,1)
-run_once('indicator-session-service',nil,1)
-run_once('indicator-sound-service',nil,1)
+--run_once('ssh-add','~/.ssh/id_rsa ~/.ssh/id_rsa-AIRG',1)
+--run_once('indicator-cpufreq',nil,1)
+--run_once('nm-applet',nil,1)
+--run_once('evolution-alarm-notify',nil,1)
+--run_once('indicator-session-service',nil,1)
+--run_once('indicator-sound-service',nil,1)
 --run_once('banshee',nil,1)
 
 -- Daemons
 --run_once('xscreensaver','-nosplash',1)
-run_once('davmail',nil,1)
-run_once('dropbox','start',1)
-run_once('synergys',nil,1)
+--run_once('davmail',nil,1)
+--run_once('dropbox','start',1)
+--run_once('synergyc','192.168.8.24',1)
 
 -- Interactive apps
 --run_once('gnome-terminal','--disable-factory --title=Mutt-win -x mutt',2)
---run_once('gnome-terminal','--disable-factory --title=Home-win -x i',1)
-run_once('google-chrome',nil,1)
-run_once('pidgin',nil,1)
+----run_once('gnome-terminal','--disable-factory --title=Home-win -x i',1)
+--run_once('google-chrome',nil,1)
+--run_once('pidgin',nil,1)
 run_once('hipchat',nil,1)
 -- run_once('firefox',nil,2)
 run_once('nuvolaplayer',nil,2)
