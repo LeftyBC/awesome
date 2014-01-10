@@ -429,6 +429,8 @@ run_once('indicator-sound-service',nil,1)
 --run_once('dropbox','start',1)
 --run_once('synergyc','192.168.8.24',1)
 --run_once('synergys',nil,1)
+run_once('parcellite',nil,1)
+run_once('kupfer',nil,1)
 
 -- Interactive apps
 --run_once('gnome-terminal','--disable-factory --title=Mutt-win -x mutt',2)
